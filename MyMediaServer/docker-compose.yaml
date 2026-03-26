@@ -1,0 +1,24 @@
+services:
+  media_server_db:
+    image: postgres:16 # Змінюємо з 18 на 16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: media_server
+    volumes:
+      - db_data:/var/lib/postgresql/data # Класичний шлях, який працює
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - media_server_db
+
+volumes:
+  db_data:
