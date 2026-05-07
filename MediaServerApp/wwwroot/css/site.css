@@ -1,31 +1,104 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+:root {
+    --bg-color: #0f1014;
+    --card-bg: #1a1c23;
+    --text-main: #e1e1e1;
+    --accent-color: #3d5afe;
+    --accent-hover: #536dfe;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Навігаційна панель */
+.navbar {
+    background-color: rgba(26, 28, 35, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #2d303e;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.navbar-brand, .nav-link {
+    color: var(--text-main) !important;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Картки фільмів */
+.movie-card {
+    background-color: var(--card-bg);
+    border: 1px solid #2d303e;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    overflow: hidden;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    border-color: var(--accent-color);
+}
+
+.movie-poster-placeholder {
+    background: linear-gradient(45deg, #23252f, #2d303e);
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.badge-genre {
+    background-color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* Виправляємо стандартний синій колір посилань */
+a {
+    color: #8096ff !important; /* Світло-синій, який добре видно */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a3b3ff !important;
+}
+
+/* Виправляємо Bootstrap-класи, які зазвичай занадто темні */
+.text-primary {
+    color: #4d69ff !important; /* Яскравий акцентний */
+}
+
+.text-info {
+    color: #64ffda !important; /* М'ятний/бірюзовий, ідеальний для Dark Mode */
+}
+
+.text-muted {
+    color: #9ca3af !important; /* Світло-сірий замість темно-сірого */
+}
+
+/* Виправляємо хлібні крихти (Breadcrumbs) у Details */
+.breadcrumb-item a {
+    color: #64ffda !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #4b5563; /* Колір роздільника / */
+}
+
+/* Колір тексту в інпутах (пошук) */
+.form-control {
+    color: white !important;
+}
+
+.form-control::placeholder {
+    color: #6b7280 !important;
 }

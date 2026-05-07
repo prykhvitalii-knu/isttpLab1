@@ -120,7 +120,6 @@
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/scopedcss/bundle/MediaServerApp.styles.css
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/scopedcss/projectbundle/MediaServerApp.bundle.scp.css
-/Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/gxrfq51twh-b9sayid5wm.gz
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/wxey1av8jn-61n19gt1b8.gz
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/c726xw84xc-xtxxf3hu2r.gz
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/etnafhktq3-bqjiyaj88i.gz
@@ -194,3 +193,4 @@
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/MediaServerApp.pdb
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/MediaServerApp.genruntimeconfig.cache
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/ref/MediaServerApp.dll
+/Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/gxrfq51twh-3u9g2mxpmi.gz

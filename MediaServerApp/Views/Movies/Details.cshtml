@@ -1,0 +1,44 @@
+@model MediaServerApp.Models.Data.Movie
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" class="text-info">Library</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="ratio ratio-16x9 mb-4 shadow-lg rounded overflow-hidden" style="border: 1px solid #2d303e;">
+                <video controls autoplay class="w-100">
+                    <source src="@Model.FilePath" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <h1 class="text-white">@Model.Title</h1>
+            <p class="text-secondary"">Released: @Model.ReleaseDate?.ToShortDateString() | Duration: @Model.Duration min</p>
+            <hr class="border-secondary" />
+            <h5 class="text-white">Description</h5>
+            <p class="text-light">@Model.Description</p>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card movie-card p-3">
+                <h6 class="text-info">Quick Info</h6>
+                <p class="small mb-1">Status: <span class="text-success">Available</span></p>
+                <p class="small mb-3">Quality: <span class="badge bg-secondary">HD</span></p>
+                <form asp-action="ToggleSave" method="post">
+                    <input type="hidden" name="movieId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-outline-warning w-100 btn-sm">
+                        ⭐ Add to Saved
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

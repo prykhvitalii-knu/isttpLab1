@@ -13,6 +13,8 @@ builder.Services.AddDbContext<MediaContext>(options =>
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -21,8 +23,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseRouting();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

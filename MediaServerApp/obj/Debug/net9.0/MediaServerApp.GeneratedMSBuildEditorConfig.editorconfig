@@ -36,6 +36,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/vit/Desktop/isttp/MediaServerApp/Views/Movies/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWVzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/vit/Desktop/isttp/MediaServerApp/Views/Movies/History.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWVzL0hpc3RvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/vit/Desktop/isttp/MediaServerApp/Views/Movies/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWVzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
