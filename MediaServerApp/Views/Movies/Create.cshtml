@@ -1,0 +1,79 @@
+@model MediaServerApp.Models.Data.Movie
+
+@{
+    ViewData["Title"] = "Add New Movie";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card movie-card p-4 shadow-lg border-secondary">
+                <h3 class="text-white fw-bold mb-4">Add New Movie</h3>
+                
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label text-muted small fw-medium">Movie Title</label>
+                        <input asp-for="Title" class="form-control bg-dark text-white border-secondary" placeholder="Enter title..." required />
+                        <span asp-validation-for="Title" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FilePath" class="form-label text-muted small fw-medium">File Path</label>
+                        <input asp-for="FilePath" class="form-control bg-dark text-white border-secondary" placeholder="/media/your-video.mp4" required />
+                        <span asp-validation-for="FilePath" class="text-danger small"></span>
+                        <div class="form-text text-secondary small">Path must start with /media/</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Duration" class="form-label text-muted small fw-medium">Duration (min)</label>
+                            <input asp-for="Duration" type="number" class="form-control bg-dark text-white border-secondary" placeholder="120" />
+                            <span asp-validation-for="Duration" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ReleaseDate" class="form-label text-muted small fw-medium">Release Date</label>
+                            <input asp-for="ReleaseDate" type="date" class="form-control bg-dark text-white border-secondary" />
+                            <span asp-validation-for="ReleaseDate" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-muted small fw-medium">Genres</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            @if (ViewBag.Genres != null)
+                            {
+                                foreach (var genre in ViewBag.Genres)
+                                {
+                                    <div class="form-check form-check-inline me-0 p-0">
+                                        <input class="btn-check" type="checkbox" name="selectedGenres" id="genre_@genre.Id" value="@genre.Id">
+                                        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="genre_@genre.Id">
+                                            @genre.Name
+                                        </label>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label text-muted small fw-medium">Description</label>
+                        <textarea asp-for="Description" class="form-control bg-dark text-white border-secondary" rows="4" placeholder="Enter movie plot summary..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-grid gap-3 d-md-flex justify-content-md-end mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">Cancel</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-medium">Save Movie</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

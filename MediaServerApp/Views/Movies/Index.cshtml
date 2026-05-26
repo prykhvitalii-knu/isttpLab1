@@ -7,7 +7,10 @@
 
 <div class="container">
     <div class="my-4">
-        <h2 class="fw-bold text-white">@(ViewBag.PageTitle ?? "Home")</h2>
+        <h2 class="fw-bold text-white mb-0">@(ViewBag.PageTitle ?? "Home")</h2>
+        <a class="btn btn-sm btn-primary rounded-pill px-3 text-white" asp-controller="Movies" asp-action="Create">
+            Add Movie
+        </a>
     </div>
 
     @if (!Model.Any())
@@ -39,7 +42,7 @@
                             <h5 class="card-title text-truncate">@item.Title</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">@item.ReleaseDate?.Year</small>
-                                <span class="badge badge-genre">@item.Duration min</span>
+                                <span class="badge badge-genre">@item.Duration sec</span>
                             </div>
                             <div class="mt-3 d-grid">
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-light btn-sm">Watch Now</a>
@@ -51,3 +54,73 @@
         </div>
     }
 </div>
+    <div class="mt-5 pt-4 border-top border-secondary">
+        <h3 class="fw-bold text-white mb-4">Library Analytics</h3>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card movie-card p-3 h-100">
+                    <div id="yearChart" style="height: 300px;"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card movie-card p-3 h-100">
+                    <div id="genreChart" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+@section Scripts {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            // Налаштування для Dark Mode (щоб графіки не були білими)
+            const darkOptions = {
+                backgroundColor: 'transparent',
+                legend: { textStyle: { color: '#9ca3af' } },
+                titleTextStyle: { color: '#ffffff', fontSize: 16 },
+                hAxis: { textStyle: { color: '#9ca3af' }, gridlines: { color: '#2d303e' }, baselineColor: '#2d303e' },
+                vAxis: { textStyle: { color: '#9ca3af' }, gridlines: { color: '#2d303e' }, baselineColor: '#2d303e' }
+            };
+
+            // 1. Малюємо графік за роками (Стовпчикова)
+            fetch('/api/charts/countByYear')
+                .then(response => response.json())
+                .then(data => {
+                    const dataTable = new google.visualization.DataTable();
+                    dataTable.addColumn('string', 'Рік');
+                    dataTable.addColumn('number', 'Кількість фільмів');
+                    
+                    data.forEach(item => dataTable.addRow([item.year, item.count]));
+
+                    const options = { ...darkOptions, title: 'Releases by Year' };
+                    // Використовуємо ColumnChart як у прикладі
+                    const chart = new google.visualization.ColumnChart(document.getElementById('yearChart'));
+                    chart.draw(dataTable, options);
+                });
+
+            // 2. Малюємо графік за жанрами (Кільцева / PieChart)
+            fetch('/api/charts/countByGenre')
+                .then(response => response.json())
+                .then(data => {
+                    const dataTable = new google.visualization.DataTable();
+                    dataTable.addColumn('string', 'Жанр');
+                    dataTable.addColumn('number', 'Кількість');
+                    
+                    data.forEach(item => dataTable.addRow([item.genre, item.count]));
+
+                    const options = { 
+                        ...darkOptions, 
+                        title: 'Movies by Genre',
+                        pieHole: 0.4, // Робить діаграму кільцевою, виглядає стильніше
+                        colors: ['#3d5afe', '#ff1744', '#00e676', '#ffea00', '#d500f9']
+                    };
+                    const chart = new google.visualization.PieChart(document.getElementById('genreChart'));
+                    chart.draw(dataTable, options);
+                });
+        }
+    </script>
+}

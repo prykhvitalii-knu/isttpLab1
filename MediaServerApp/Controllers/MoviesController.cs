@@ -146,5 +146,39 @@ namespace MediaServerApp.Controllers
 
             return RedirectToAction(nameof(History));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            // Завантажуємо всі жанри для відображення у формі
+            ViewBag.Genres = await _context.Genres.ToListAsync();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Movie movie, int[] selectedGenres)
+        {
+            if (ModelState.IsValid)
+            {
+                // Якщо користувач вибрав якісь жанри
+                if (selectedGenres != null && selectedGenres.Length > 0)
+                {
+                    // Знаходимо ці жанри в базі і додаємо до фільму
+                    // УВАГА: Перевір, щоб тут була твоя правильна назва (Genres або MovieGenres)
+                    movie.Genres = await _context.Genres
+                        .Where(g => selectedGenres.Contains(g.Id))
+                        .ToListAsync();
+                }
+
+                _context.Movies.Add(movie);
+                await _context.SaveChangesAsync();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            
+            ViewBag.Genres = await _context.Genres.ToListAsync();
+            return View(movie);
+        }
+
     }
 }
