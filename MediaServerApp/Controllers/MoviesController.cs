@@ -22,9 +22,15 @@ namespace MediaServerApp.Controllers
                 moviesQuery = moviesQuery.Where(m => m.Title.ToLower().Contains(searchString.ToLower()));
             }
 
-            if (genreId.HasValue)
-            {
-                moviesQuery = moviesQuery.Where(m => m.Genres.Any(mg => mg.Id == genreId));
+            if (genreId.HasValue) {
+                // Переконайся, що назва колекції (Genres чи MovieGenres) збігається з твоєю моделлю Movie
+                moviesQuery = moviesQuery.Where(m => m.Genres.Any(g => g.Id == genreId));
+                
+                var selectedGenre = await _context.Genres.FindAsync(genreId);
+                ViewBag.PageTitle = selectedGenre?.Name;
+            }
+            else {
+                ViewBag.PageTitle = "Home";
             }
 
             ViewBag.SavedMovieIds = await _context.SavedItems.Select(s => s.MovieId).ToListAsync();
@@ -39,8 +45,6 @@ namespace MediaServerApp.Controllers
 
         public async Task<IActionResult> Saved()
         {
-            // Тут логіка залежить від твоєї структури БД. 
-            // Припустимо, ми просто витягуємо все з таблиці SavedItems для поточного юзера
             var savedMovies = await _context.SavedItems
                 .Include(s => s.Movie)
                 .Select(s => s.Movie)
@@ -119,6 +123,28 @@ namespace MediaServerApp.Controllers
                 .ToListAsync();
 
             return View(history);
+        }
+
+        public async Task<IActionResult> Genres()
+        {
+            // Завантажуємо жанри з бази
+            var genres = await _context.Genres.ToListAsync();
+            return View(genres);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteFromHistory(int movieId)
+        {
+            var historyEntry = await _context.WatchHistories 
+                .FirstOrDefaultAsync(h => h.UserId == 1 && h.MovieId == movieId);
+
+            if (historyEntry != null)
+            {
+                _context.WatchHistories.Remove(historyEntry);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(History));
         }
     }
 }

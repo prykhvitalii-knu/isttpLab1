@@ -7,7 +7,7 @@
 <div class="container mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Index" class="text-info">Library</a></li>
+
             <li class="breadcrumb-item active text-white" aria-current="page">@Model.Title</li>
         </ol>
     </nav>
@@ -30,8 +30,8 @@
         <div class="col-lg-3">
             <div class="card movie-card p-3">
                 <h6 class="text-info">Quick Info</h6>
-                <p class="small mb-1">Status: <span class="text-success">Available</span></p>
-                <p class="small mb-3">Quality: <span class="badge bg-secondary">HD</span></p>
+                <p class="description">Status: <span class="text-success">Available</span></p>
+                <p class="description">Quality: <span class="badge bg-secondary">HD</span></p>
                 <form asp-action="ToggleSave" method="post">
                     <input type="hidden" name="movieId" value="@Model.Id" />
                     <button type="submit" class="btn btn-outline-warning w-100 btn-sm">

@@ -1,0 +1,24 @@
+@model IEnumerable<MediaServerApp.Models.Data.Genre>
+
+@{
+    ViewData["Title"] = "Genres";
+}
+
+<div class="container mt-4">
+    <h2 class="text-white fw-bold mb-4">Explore by Genre</h2>
+    
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var genre in Model)
+        {
+            <div class="col">
+                <a asp-controller="Movies" asp-action="Index" asp-route-genreId="@genre.Id" class="text-decoration-none">
+                    <div class="card movie-card p-5 text-center h-100 d-flex flex-column justify-content-center align-items-center"
+                         style="background: linear-gradient(135deg, #1e2029 0%, #121318 100%); border: 1px solid #2d303e;">
+                        <div class="display-5 mb-3">🎞️</div>
+                        <h4 class="text-white fw-semibold mb-0">@genre.Name</h4>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

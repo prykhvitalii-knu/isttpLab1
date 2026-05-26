@@ -193,4 +193,4 @@
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/MediaServerApp.pdb
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/MediaServerApp.genruntimeconfig.cache
 /Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/ref/MediaServerApp.dll
-/Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/gxrfq51twh-3u9g2mxpmi.gz
+/Users/vit/Desktop/isttp/MediaServerApp/obj/Debug/net9.0/compressed/gxrfq51twh-3sgh1s0kn4.gz
